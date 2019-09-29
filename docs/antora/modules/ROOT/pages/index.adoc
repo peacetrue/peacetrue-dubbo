@@ -1,1 +1,10 @@
 = 简介
+
+* 名称：**peacetrue-dubbo**
+* 用途：提供 dubbo 扩展支持
+* 地址： https://github.com/peacetrue/peacetrue-dubbo[github^]
+
+== 具体内容
+=== 应用名称
+向消费者暴露提供者的应用名称
+

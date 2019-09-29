@@ -1,7 +1,6 @@
 plugins {
     id("java-library")
     id "io.spring.dependency-management" version "1.0.8.RELEASE"
-//    id("org.springframework.boot") version "1.5.20.RELEASE" apply(false)
     id("maven-publish")
     id("signing")
     id("idea")
@@ -9,9 +8,9 @@ plugins {
 
 allprojects { project ->
 
-    group "com.github.peacetrue.template"
-    version "1.0-SNAPSHOT"
-    description "gradle模板"
+    group "com.github.peacetrue"
+    version "2.0.0-SNAPSHOT"
+    description "提供 dubbo 扩展支持"
 
     apply plugin: "java"
     apply plugin: "java-library"
@@ -38,10 +37,8 @@ allprojects { project ->
     apply plugin: "io.spring.dependency-management"
     dependencyManagement {
         imports {
-            mavenBom "org.springframework.boot:spring-boot-dependencies:1.5.20.RELEASE"
-//            mavenBom "org.springframework.boot:spring-boot-dependencies:2.1.8.RELEASE"
-            mavenBom "com.github.peacetrue:peacetrue-dependencies:1.0.4-SNAPSHOT"
-//            mavenBom "com.github.peacetrue:peacetrue-dependencies:2.0.0-SNAPSHOT"
+            mavenBom "org.springframework.boot:spring-boot-dependencies:2.1.8.RELEASE"
+            mavenBom "com.github.peacetrue:peacetrue-dependencies:2.0.0-SNAPSHOT"
         }
     }
 
@@ -49,6 +46,10 @@ allprojects { project ->
         compileOnly "org.projectlombok:lombok"
         annotationProcessor "org.projectlombok:lombok"
         implementation("com.google.code.findbugs:jsr305")
+        implementation "com.alibaba:dubbo:2.5.6"
+
+        testImplementation 'com.alibaba.boot:dubbo-spring-boot-starter:0.1.1'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
         testImplementation "junit:junit"
         testCompileOnly "org.projectlombok:lombok"
