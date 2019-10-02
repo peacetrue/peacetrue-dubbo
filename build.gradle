@@ -37,24 +37,25 @@ allprojects { project ->
     apply plugin: "io.spring.dependency-management"
     dependencyManagement {
         imports {
-            mavenBom "org.springframework.boot:spring-boot-dependencies:2.1.8.RELEASE"
-            mavenBom "com.github.peacetrue:peacetrue-dependencies:2.0.0-SNAPSHOT"
+            mavenBom "org.springframework.boot:spring-boot-dependencies:1.5.20.RELEASE"
+            mavenBom "com.github.peacetrue:peacetrue-dependencies:1.0.4-SNAPSHOT"
         }
     }
 
     dependencies {
         compileOnly "org.projectlombok:lombok"
         annotationProcessor "org.projectlombok:lombok"
-        implementation("com.google.code.findbugs:jsr305")
-        implementation "com.alibaba:dubbo:2.5.6"
-
-        testImplementation 'com.alibaba.boot:dubbo-spring-boot-starter:0.1.1'
-        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        api "org.slf4j:slf4j-api"
+        implementation "com.google.code.findbugs:jsr305"
+        implementation "com.alibaba:dubbo:2.6.2"
 
         testImplementation "junit:junit"
         testCompileOnly "org.projectlombok:lombok"
         testAnnotationProcessor "org.projectlombok:lombok"
         testImplementation "ch.qos.logback:logback-classic"
+        testImplementation 'com.alibaba.boot:dubbo-spring-boot-starter:0.1.1'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'org.springframework.boot:spring-boot-starter-actuator'
     }
 
     task antoraCopySourceToExample() {
@@ -137,10 +138,3 @@ allprojects { project ->
     }
 
 }
-
-
-
-
-
-
-

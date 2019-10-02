@@ -1,5 +1,3 @@
-package com.github.peacetrue.dubbo;
-
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.annotation.Order;
