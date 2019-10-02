@@ -9,7 +9,7 @@ plugins {
 allprojects { project ->
 
     group "com.github.peacetrue"
-    version "1.1.0-SNAPSHOT"
+    version "2.0.0-SNAPSHOT"
     description "提供 dubbo 扩展支持"
 
     apply plugin: "java"
