@@ -23,7 +23,7 @@ allprojects { project ->
             inheritOutputDirs = false
             outputDir = tasks.compileJava.destinationDir
             testOutputDir = tasks.compileTestJava.destinationDir
-            downloadSources = true
+            downloadSources = false
             downloadJavadoc = false
         }
     }
@@ -37,9 +37,21 @@ allprojects { project ->
     apply plugin: "io.spring.dependency-management"
     dependencyManagement {
         imports {
-            mavenBom "org.springframework.boot:spring-boot-dependencies:1.5.20.RELEASE"
-            mavenBom "com.github.peacetrue:peacetrue-dependencies:1.0.4-SNAPSHOT"
+            mavenBom "org.springframework.boot:spring-boot-dependencies:2.1.8.RELEASE"
+//            mavenBom "com.github.peacetrue:peacetrue-dependencies:2.0.0-SNAPSHOT"
+//            mavenBom "org.apache.dubbo:dubbo-dependencies-bom:2.7.3"
         }
+
+        dependencies {
+            dependency("org.apache.dubbo:dubbo:2.7.3")
+            dependency("com.google.code.findbugs:jsr305:3.0.2")
+            dependency("org.projectlombok:lombok:1.18.6")
+        }
+    }
+
+    ext {
+        revision = "2.7.3"
+        dubbo = [version: revision]
     }
 
     dependencies {
@@ -47,15 +59,33 @@ allprojects { project ->
         annotationProcessor "org.projectlombok:lombok"
         api "org.slf4j:slf4j-api"
         implementation "com.google.code.findbugs:jsr305"
-        implementation "com.alibaba:dubbo:2.6.2"
+        implementation("org.apache.dubbo:dubbo") {
+            exclude group: "log4j", module: "log4j"
+            exclude group: "javax.servlet", module: "servlet-api"
+            exclude group: "org.springframework", module: "spring-context"
+        }
 
         testImplementation "junit:junit"
         testCompileOnly "org.projectlombok:lombok"
         testAnnotationProcessor "org.projectlombok:lombok"
         testImplementation "ch.qos.logback:logback-classic"
-        testImplementation 'com.alibaba.boot:dubbo-spring-boot-starter:0.1.1'
-        testImplementation 'org.springframework.boot:spring-boot-starter-test'
-        testImplementation 'org.springframework.boot:spring-boot-starter-actuator'
+        testImplementation "org.springframework.boot:spring-boot-starter"
+        testImplementation "org.apache.dubbo:dubbo-spring-boot-starter:${revision}"
+        testImplementation("org.apache.dubbo:dubbo-dependencies-zookeeper:${dubbo.version}") {
+            exclude group: "log4j", module: "log4j"
+            exclude group: "org.slf4j", module: "slf4j-log4j12"
+        }
+//        testImplementation('org.apache.dubbo:dubbo-spring-boot-starter:2.7.3') {
+//            exclude group: "log4j", module: "log4j"
+//            exclude group: "javax.servlet", module: "servlet-api"
+//            exclude group: "org.springframework", module: "spring-context"
+//        }
+//        testImplementation('org.apache.dubbo:dubbo-dependencies-zookeeper:2.7.3') {
+//            exclude group: "org.slf4j", module: "slf4j-log4j12"
+//        }
+//        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//        testImplementation 'org.springframework.boot:spring-boot-starter-actuator'
+
     }
 
     task antoraCopySourceToExample() {

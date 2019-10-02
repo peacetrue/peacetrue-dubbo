@@ -1,16 +1,16 @@
 package com.github.peacetrue.dubbo;
 
-import com.alibaba.dubbo.common.Constants;
-import com.alibaba.dubbo.common.extension.Activate;
-import com.alibaba.dubbo.rpc.*;
+import org.apache.dubbo.common.extension.Activate;
+import org.apache.dubbo.rpc.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.Ordered;
+
+import static org.apache.dubbo.common.constants.CommonConstants.CONSUMER;
 
 /**
  * @author xiayx
  */
-@Activate(group = Constants.CONSUMER, order = Ordered.LOWEST_PRECEDENCE)
+@Activate(group = {CONSUMER}, order = 10000)
 public class DubboContextFilter implements Filter {
 
     /** 配置名 */

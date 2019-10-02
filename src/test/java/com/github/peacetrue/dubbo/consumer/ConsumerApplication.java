@@ -1,6 +1,7 @@
 package com.github.peacetrue.dubbo.consumer;
 
 import com.github.peacetrue.dubbo.DemoService;
+import org.junit.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
